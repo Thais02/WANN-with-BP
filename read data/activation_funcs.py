@@ -8,9 +8,8 @@ class sigmoid:
 
     @classmethod
     def grad(cls, x):
-        sig_x = cls.calc(x)
-        return sig_x * (1 - sig_x)
-
+        """Gradient of Sigmoid function. Assumes output has already passed through sigmoid!"""
+        return x * (1 - x)
 
 class relu:
     @classmethod
@@ -32,9 +31,59 @@ class softmax:  # can be used to convert output to probabilities (in classificat
     def grad(cls, x):
         raise NotImplementedError
 
+class sine:
+    @classmethod
+    def calc(cls, x):
+        return np.sin(x)
+
+    @classmethod
+    def grad(cls, x):
+        return np.cos(x)
+
+class cosine:
+    @classmethod
+    def calc(cls, x):
+        return np.cos(x)
+
+    @classmethod
+    def grad(cls, x):
+        return -np.sin(x)
+
+class tanh:
+    @classmethod
+    def calc(cls, x):
+        return np.tanh(x)
+
+    @classmethod
+    def grad(cls, x):
+        return 1 - x**2
+
+class linear:
+    @classmethod
+    def calc(cls, x):
+        return x
+
+    @classmethod
+    def grad(cls, x):
+        return 1
+
+class gaussian:
+    @classmethod
+    def calc(cls, x):
+        return np.exp(-x**2)
+
+    @classmethod
+    def grad(cls, x):
+        return -2 * x * np.exp(-x**2)
+
 
 activation_funcs = {  # pls update with other functions you add
     'sigmoid': sigmoid,
     'relu': relu,
     'softmax': softmax,
+    'sine': sine,
+    'cosine': cosine,
+    'tanh': tanh,
+    'linear': linear,
+    'gaussian': gaussian,
 }
